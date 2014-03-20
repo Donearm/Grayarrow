@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="wrap-content">
+	{% if articles %}
+	<div class="article-content">
+
+	{% for article in articles_page.object_list %}
+		<header> <h2 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="{{ article.title|striptags }}">{{ article.title }}</a></h2> </header>
+		<nav class="post-info">
+			<abbr class="published" title="{{ article.date.isoformat() }}"> {{ article.locale_date }} </abbr>
+			{% if article.author %}
+			<address class="vcard author">By <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a></address>
+			{% endif %}
+		</nav><!-- /.post-info -->
+		<article class="hentry">
+			<div class="entry-content"> {{ article.summary }} </div><!-- /.entry-content -->
+
+				<div class="post-permalink"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Read more of {{ article.title|striptags }}">Read more <i></i></a></div>
+
+
+				<div class="post-tag-row">
+				{% if article.tags %}
+					<span>Tagged as: </span>
+					{% for tag in article.tags %}
+						<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag|e }}</a>
+					{% endfor %}
+				{% endif %}
+				</div>
+		</article><!-- /.hentry -->
+	{% endfor %}
+	</div><!-- /.article-content -->
+
+	{% endif %}
+
+</section><!-- /#wrap-content -->
+{% include 'pagination.html' %}
+{% include 'footer.html' %}
+
+{% endblock content %}

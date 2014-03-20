@@ -1,0 +1,11 @@
+<nav id="links-list" class="widget nav-lists">
+    <div class="nav-labels">
+        <span>Links</span>
+    </div>
+    <ul>
+        {% for name, url in LINKS %}
+            <li id="links-row"><a href="{{ url|e }}">{{ name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+

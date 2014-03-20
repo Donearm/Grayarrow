@@ -1,0 +1,14 @@
+{% block content %}
+
+<ul>
+	{% for article in dates %}
+	<li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a> - 
+	<time pubdate="pubdate" datetime="{{ article.date.isoformat() 
+		}}">{{ article.date|strftime('%d %B %Y') }}</time><br />
+		{% if article.subtitle %}
+		<small>{{ article.subtitle }}</small><br />
+		{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

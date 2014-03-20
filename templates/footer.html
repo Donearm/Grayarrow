@@ -1,0 +1,100 @@
+{% block footer %}
+<div id="totop">
+    <a href="#">To the Top</a>
+</div>
+<footer id="bottombar">
+
+            <nav id="archives-list" class="widget nav-lists">
+                <div class="nav-labels">
+                    <span>Archives</span>
+                </div>
+                {% include 'archives.html' %}
+            </nav>
+            {% if PAGES %}
+            <nav id="pages-list" class="nav-lists">
+                <div class="nav-labels">
+                    <span>Pages</span>
+                </div>
+                 <ul>
+                  {% for title, link in MENUITEMS %}
+                      <li><a href="{{ link }}">{{ title }}</a></li>
+                  {% endfor %}
+                  {% if DISPLAY_PAGES_ON_MENU %}
+                    {% for p in PAGES %}
+                      <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                    {% endfor %}
+                  {% else %}
+                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                      {% for cat, null in categories %}
+                        <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                      {% endfor %}
+                    {% endif %}
+                  {% endif %}
+                  </ul>
+            </nav>
+            {% endif %}
+            <nav id="tags-list" class="nav-lists">
+                <div class="nav-labels">
+                    <span>Tags</span>
+                </div>
+                {% if tags %}
+                    <ul>
+                    {% for tag in tag_cloud %}
+                        <li id="tag-row"><a href="{{ SITEURL }}/{{ tag.0.url }}">{{ tag.0|e }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </nav>
+
+            <nav id="categories-list" class="nav-lists">
+                <div class="nav-labels">
+                    <span>Categories</span>
+                </div>
+                {% if categories %}
+                    <ul>
+                    {% for cat, null in categories %}
+                        <li id="category-row"><a href="{{ SITEURL }}/{{ cat.url|e }}">{{ cat }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </nav>
+
+            {% if LINKS %}
+            {% include 'links.html' %}
+            {% endif %}
+
+            {% if SOCIAL %}
+            <nav id="social-list" class="widget nav-lists">
+                <div class="nav-labels">
+                    <span>Social</span>
+                </div>
+                {% include 'social_icons.html' %}
+            </nav>
+            {% endif %}
+            {% if TWITTER_USERNAME %}
+            <nav id="twitter-widget" class="widget nav-lists">
+                <div class="nav-labels">
+                    <span>Twitter Timeline</span>
+                </div>
+                {% include 'twitter.html' %}
+            </nav>
+            {% endif %}
+            {% if GOODREADS_ID %}
+            <nav id="goodreads-list" class="widget nav-lists">
+                <div class="nav-labels">
+                    <span>Recently Read</span>
+                </div>
+                {% include 'goodreads.html' %}
+            </nav>
+            {% endif %}
+
+    <div id="credits">
+
+           <address id="about">
+               Powered by <a href="http://getpelican.com/">Pelican</a>, hosted on <a href="http://github.com">Github</a>
+               <br />
+               Icons by <a href="http://www.designbolts.com/">DesignBolts.com</a>
+           </address>
+    </div>
+</footer>
+{% endblock footer %}
